@@ -4,7 +4,7 @@
   * _puts - function that prints strings
   *
   * @c: pointer to string
-  * 
+  *
   * Return: number of bytes
   */
 int _puts(char *c)
@@ -15,8 +15,8 @@ int _puts(char *c)
 	{
 		for (i = 0; c[i] != '\0'; i++)
 		{
-			_putchar(c[i]);
+			return (_putchar(c[i]));
 		}
 	}
-	return (i);
+	return (0);
 }
