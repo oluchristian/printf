@@ -1,0 +1,99 @@
+#include "main.h"
+/**
+ * _printf - prints values to stdout
+ *
+ * @format: number of arguements passed
+ *
+ * Return: the number of characters printed
+ */
+int _printf(char *format, ...)
+{
+        int i = 0, j = 0, num = 0;
+        unsigned int binaryNum[64];
+        int divisor, k;
+        va_list args;
+
+        va_start(args, format);
+
+        for (i = 0; format[i] != '\0'; i++)
+        {
+                if (format[i] == '%')
+                {
+                        i++;
+
+                        if (format[i] == 'c')
+                        {
+                                char letter = va_arg(args, int);
+
+                                _putchar(letter);
+                                num += 1;
+                        }
+                        else if (format[i] == 's')
+                        {
+                                char *str = va_arg(args, char*);
+
+                                while (*str)
+                                {
+                                        _putchar(*str);
+                                        str++;
+                                        num += 1;
+                                }
+                        }
+                        else if (format[i] == 'd' || format[i] == 'i')
+                        {
+                                int digits = va_arg(args, int);
+
+                
+                                if (digits < 0)
+                                {
+                                    _putchar('-');
+                                    num += 1;
+                                    digits = -digits;
+                                }
+
+                
+                                divisor = 1;
+                                while (digits / divisor > 9)
+                                {
+                                    divisor *= 10;
+                                }
+
+                                while (divisor != 0)
+                                {
+                                    int digit = (digits / divisor) % 10;
+                                    _putchar('0' + digit);
+                                    num += 1;
+                                    divisor /= 10;
+                                }
+                        }
+                        else if (format[i] == 'b')
+                        {
+                                //alx said b must be an unsigned number
+                            unsigned int positiveNum = va_arg(args, unsigned int);
+
+                            while (positiveNum > 0)
+                            {
+                            binaryNum[j++] = positiveNum % 2;
+                            // The code below will return a whole number,
+                            //when you divide by 2
+                            positiveNum /= 2;
+                            }
+                                //I printed the binary numbers in reverse order
+                                // From my research, this is the standard way to print binary from array
+                            for (k = j-1; k >= 0; k--)
+                            {
+                                
+                                _putchar(binaryNum[k] + 48);
+                            }
+                        }
+                }
+                        else
+                        {
+                                _putchar(format[i]);
+                                num += 1;
+                        }
+        }
+        va_end(args);
+        return (num);
+}
+
