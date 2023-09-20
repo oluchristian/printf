@@ -12,8 +12,8 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	/* returns 0 if no character is passed */
-	if (format == NULL)
-		return (0);
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 	va_start(args, format);
 	/* iterate through *format string */
 	for (i = 0; format[i] != '\0'; i++)
