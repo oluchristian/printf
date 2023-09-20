@@ -24,6 +24,8 @@ int _printf(const char *format, ...)
 		/* switch cases for when char '%' is found */
 		else if (format[i] == '%')
 		{
+			if (format[i + 1] == '\0')
+				break;
 			num += prnt_func(args, format[i + 1]);
 			i++;
 		}

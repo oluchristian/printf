@@ -9,14 +9,7 @@
   */
 int _puts(char *c)
 {
-	int i = 0;
-
-	if (c)
-	{
-		for (i = 0; c[i] != '\0'; i++)
-		{
-			return (_putchar(c[i]));
-		}
-	}
-	return (0);
+	if (!c)
+		c = "(null)";
+	return (write(1, c, _strlen(c)));
 }
